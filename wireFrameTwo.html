@@ -16,14 +16,21 @@
     <h1>AD&D 2nd Edition Quiz</h1>
   </header>
   <main>
-    <form>
-        <h2>Question: </h2>
-        <input type="radio" name="option 1" />
-        <input type="radio" name="option 2" />
-        <input type="radio" name="option 3" />
-        <input type="radio" name="option 4" />
-        <input type="radio" name="option 5" />
-        <button type="button" name="confirm">Next Question</button>
+    <aside>Your current score is ${store.score}!</aside>
+    <aside>${store.questionNumber + 1}/5</aside>
+    <form id='form'>
+    <fieldset>
+    <legend><h2>${store.questions[store.questionNumber].question}</h2></legend>
+		  <input id='answer' type="radio" name='answer' value='${store.questions[store.questionNumber].answers[0]}' required>
+      <label for='answer'>${store.questions[store.questionNumber].answers[0]}</label><br>
+      <input id='answer' type="radio" name='answer' value='${store.questions[store.questionNumber].answers[1]}' required>
+      <label for='answer'>${store.questions[store.questionNumber].answers[1]}</label><br>
+      <input id='answer' type="radio" name='answer' value='${store.questions[store.questionNumber].answers[2]}' required>
+      <label for='answer'>${store.questions[store.questionNumber].answers[2]}</label><br>
+      <input id='answer' type="radio" name='answer' value='${store.questions[store.questionNumber].answers[3]}' required>
+      <label for='answer'>${store.questions[store.questionNumber].answers[3]}</label>
+    </fieldset>
+      <button class='qButton'>Submit</button>
     </form>
   </main>
 </body>

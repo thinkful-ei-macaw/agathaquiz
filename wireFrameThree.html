@@ -16,7 +16,15 @@
     <h1>AD&D 2nd Edition Quiz</h1>
   </header>
   <main>
-    
+    <p>Correct!</p>
+    <form id='feedback'>
+      <button class='feedButton' input type="submit">Next</button>
+    </form>
+<!--correct on top, wrong below-->
+    <p>I'm sorry, that answer was incorrect. The correct answer was ${store.questions[store.questionNumber].correctAnswer}.</p>
+    <form id='feedback'>
+      <button class='feedButton' input type="submit">Next</button>
+    </form>
   </main>
 </body>
 
