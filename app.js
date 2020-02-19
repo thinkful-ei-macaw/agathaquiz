@@ -5,24 +5,54 @@ const store = {
   // 5 or more questions are required
   questions: [
     {
-      question: 'What color is broccoli?',
+      question: 'What does THAC0 stand for?',
       answers: [
-        'red',
-        'orange',
-        'pink',
-        'green'
+        'To Hit Armor Class 0',
+        'The Highest Armor Class, 0',
+        'The Holy Angel Council 0',
+        'The History A Chronicle: 0'
       ],
-      correctAnswer: 'green'
+      correctAnswer: 'To Hit Armor Class 0'
     },
     {
-      question: 'What is the current year?',
+      question: 'The spell Fireball has which of the following characteristics?',
       answers: [
-        '1970',
-        '2015',
-        '2019',
-        '2005'
+        'Arcane, Conjuration, 1st level, 2d4/CL 20d4 max',
+        'Divine, Elemental Fire, 4th level, 3d8+1/CL 3d8+20 max',
+        'Arcane, Evocation, 3rd level, 1d6/CL 10d6 max',
+        'Arcane, Incantation, 3rd level, 1d6/CL 15d6 max'
       ],
-      correctAnswer: '2019'
+      correctAnswer: 'Arcane, Evocation, 3rd level, 1d6/CL 10d6 max'
+    },
+    {
+      question: 'Which of the following is a real Sage/Specialist class?',
+      answers: [
+        'Mystic',
+        'Cartographer',
+        'Warlock',
+        'Songmage'
+      ],
+      correctAnswer: 'Cartographer'
+    },
+    {
+      question: 'At what level does a Cleric achieve their Lord Level?',
+      answers: [
+        '10th',
+        '11th',
+        '8th',
+        '9th'
+      ],
+      correctAnswer: '8th'
+    },
+    {
+      question: 'Which of these is not a real breed of Dragons?',
+      answers: [
+        'Mercury Dragon',
+        'Cloud Dragon',
+        'Amethyst Dragon',
+        'Ice Dragon'
+      ],
+      correctAnswer: 'Ice Dragon'
     }
   ],
   quizStarted: false,
@@ -44,15 +74,109 @@ const store = {
  * SEE BELOW FOR THE CATEGORIES OF THE TYPES OF FUNCTIONS YOU WILL BE CREATING 👇
  * 
  */
+renderIntroView()
+startQ()
 
-/********** TEMPLATE GENERATION FUNCTIONS **********/
+function renderIntroView() {
+  store.score = 0;
+  store.questionNumber = 0;
+  $("main").html(`
+  <p>This Quiz will test useless knowledge about an outdated edition of Dungeons and Dragons!</p>
+  <form id='start'>
+    <button class='startButton' input type="submit">Start Quiz</button>
+  </form>
+  `)
+}
 
-// These functions return HTML templates 
+function renderQuestionView() {
 
-/********** RENDER FUNCTION(S) **********/
+  $("main").html(`
+    <aside>Your current score is ${store.score}!</aside>
+    <aside>${store.questionNumber + 1}/5</aside>
+    <form id='form'>
+    <fieldset>
+    <legend><h2>${store.questions[store.questionNumber].question}</h2></legend>
+		  <input id='answer' type="radio" name='answer' value='${store.questions[store.questionNumber].answers[0]}' required>
+      <label for='answer'>${store.questions[store.questionNumber].answers[0]}</label><br>
+      <input id='answer' type="radio" name='answer' value='${store.questions[store.questionNumber].answers[1]}' required>
+      <label for='answer'>${store.questions[store.questionNumber].answers[1]}</label><br>
+      <input id='answer' type="radio" name='answer' value='${store.questions[store.questionNumber].answers[2]}' required>
+      <label for='answer'>${store.questions[store.questionNumber].answers[2]}</label><br>
+      <input id='answer' type="radio" name='answer' value='${store.questions[store.questionNumber].answers[3]}' required>
+      <label for='answer'>${store.questions[store.questionNumber].answers[3]}</label>
+    </fieldset>
+      <button class='qButton'>Submit</button>
+    </form>`);
+}
 
-// This function conditionally replaces the contents of the <main> tag based on the state of the store
+function renderFeedbackViewC() {
+  $("main").html(`
+    <p>Correct!</p>
+    <form id='feedback'>
+      <button class='feedButton' input type="submit">Next</button>
+    </form>
+  `)
+  store.questionNumber++
+  store.score++
+}
 
-/********** EVENT HANDLER FUNCTIONS **********/
+function renderFeedbackViewF() {
+  $("main").html(`
+    <p>I'm sorry, that answer was incorrect. The correct answer was ${store.questions[store.questionNumber].correctAnswer}.</p>
+    <form id='feedback'>
+      <button class='feedButton' input type="submit">Next</button>
+    </form>
+  `)
+  store.questionNumber++
+}
 
-// These functions handle events (submit, click, etc)
+function renderResultsView() {
+  $("main").html(`
+    <p>Your final score is ${store.score}!</p>
+    <form id='cycle'>
+      <button class='resetButton' input type="submit">Try Again?</button>
+    </form>
+  `)
+}
+
+//Render ^
+//Event Handler v
+
+function startQ(){
+  $("main").on("click", ".startButton", event => {
+    event.preventDefault();
+    submitQuestion();
+    submitFeedback();
+    store.quizStarted = true;
+    renderQuestionView();
+  })
+}
+
+function submitQuestion(){
+  $("main").on("click", ".qButton", event =>  {
+    event.preventDefault();
+    if($("input:checked").val() === store.questions[store.questionNumber].correctAnswer){
+      renderFeedbackViewC();
+    } else {
+      renderFeedbackViewF();
+    }
+  })
+}
+
+function submitFeedback(){
+  $("main").on("click", ".feedButton", event =>  {
+    event.preventDefault();
+    if(store.questionNumber === 5){
+      renderResultsView();
+    } else {
+      renderQuestionView();
+    }
+  })
+}
+
+function resetQuiz(){
+  $("main").on("click", ".resetButton", event => {
+    event.preventDefault();
+    renderIntroView();
+  })
+}
