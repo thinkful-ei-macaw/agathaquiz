@@ -81,7 +81,7 @@ function renderIntroView() {
   store.score = 0;
   store.questionNumber = 0;
   $("main").html(`
-  <p>This Quiz will test useless knowledge about an outdated edition of Dungeons and Dragons!</p>
+  <h2>This Quiz will test useless knowledge about an outdated edition of Dungeons and Dragons!</h2>
   <form id='start'>
     <button class='startButton' input type="submit">Start Quiz</button>
   </form>
@@ -111,7 +111,7 @@ function renderQuestionView() {
 
 function renderFeedbackViewC() {
   $("main").html(`
-    <p>Correct!</p>
+    <aside>Correct!</aside>
     <form id='feedback'>
       <button class='feedButton' input type="submit">Next</button>
     </form>
@@ -122,7 +122,7 @@ function renderFeedbackViewC() {
 
 function renderFeedbackViewF() {
   $("main").html(`
-    <p>I'm sorry, that answer was incorrect. The correct answer was ${store.questions[store.questionNumber].correctAnswer}.</p>
+    <aside>I'm sorry, that answer was incorrect. The correct answer was ${store.questions[store.questionNumber].correctAnswer}.</aside>
     <form id='feedback'>
       <button class='feedButton' input type="submit">Next</button>
     </form>
@@ -132,7 +132,7 @@ function renderFeedbackViewF() {
 
 function renderResultsView() {
   $("main").html(`
-    <p>Your final score is ${store.score}!</p>
+    <h2>Your final score is ${store.score}!</h2>
     <form id='cycle'>
       <button class='resetButton' input type="submit">Try Again?</button>
     </form>
