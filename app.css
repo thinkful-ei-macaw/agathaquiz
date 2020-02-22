@@ -20,15 +20,15 @@ body {
 
 h1, main {
  color: gainsboro;
- text-shadow: 2px 4px 4px royalblue;
+ text-shadow: 2px 4px 4px black;
 }
 
 main {
   border: solid gainsboro 2px;
   border-radius: 6px;
   background-image: linear-gradient(
-    rgba(0, 0, 0, 0.4),
-    rgba(0, 0, 0, 0.4)),
+    rgba(0, 0, 0, 0.6),
+    rgba(0, 0, 0, 0.6)),
   url("https://cf.geekdo-images.com/opengraph/img/6E6Yvbt_1p3GwJZz_DA5sZuuZGA=/fit-in/1200x630/pic567878.jpg");
   background-size: 100% 100%;
   background-repeat: no-repeat;
